@@ -1,5 +1,5 @@
 use cosmwasm_std::{
-    log, to_binary, Api, Binary, Env, Extern, HandleResponse, InitResponse, Querier, StdError,
+    to_binary, Api, Binary, Env, Extern, HandleResponse, InitResponse, Querier, StdError,
     StdResult, Storage,
 };
 
@@ -44,15 +44,7 @@ pub fn try_add<S: Storage, A: Api, Q: Querier>(
         state.count += amount;
         Ok(state)
     })?;
-    let stateread = config_read(&deps.storage).load()?;
-    Ok(HandleResponse{
-        messages: vec![],
-        log: vec![
-            log("added", amount),
-            log("result", stateread.count),
-        ],
-        data: None,
-    })
+    Ok(HandleResponse::default())
 }
 
 pub fn try_reset<S: Storage, A: Api, Q: Querier>(
